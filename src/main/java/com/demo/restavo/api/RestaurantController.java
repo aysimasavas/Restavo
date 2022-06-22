@@ -16,7 +16,7 @@ import com.demo.restavo.entities.Restaurant;
 import com.demo.restavo.service.CategoryService;
 import com.demo.restavo.service.RestaurantService;
 
-@CrossOrigin(origins = "http://localhost:8078")
+@CrossOrigin
 @RestController
 @RequestMapping("/")
 public class RestaurantController {
@@ -27,28 +27,27 @@ public class RestaurantController {
 	@Autowired
 	CategoryService categoryService;
 
-	// tüm restoranları listeler
 	@GetMapping("restaurants")
 	public ResponseEntity<List<Restaurant>> getAll() {
 		List<Restaurant> restaurants = restaurantService.findAll();
 		return ResponseEntity.ok(restaurants);
 	}
 
-	// id'si verilen restoranı getirir
+
 	@GetMapping("restaurant/{id}")
 	public ResponseEntity<Optional<Restaurant>> getRestaurant(@PathVariable("id") long id) {
 		Optional<Restaurant> restaurant = restaurantService.findAllById(id);
 		return ResponseEntity.ok(restaurant);
 	}
 
-	// kategorileri listeler
+
 	@GetMapping("getCategories")
 	public ResponseEntity<List<Category>> getAllCategories() {
 		List<Category> categories = categoryService.getAllCategories();
 		return ResponseEntity.ok(categories);
 	}
 
-	// istenilen kategorideki restoranları listeler
+
 	@GetMapping("getRestaurants/{categoryId}")
 	public ResponseEntity<List<Restaurant>> getRestaurantWithCategorie(
 			@PathVariable("categoryId") long id) {
@@ -57,5 +56,7 @@ public class RestaurantController {
 		return ResponseEntity.ok(restaurants.get());
 
 	}
+
+
 
 }
