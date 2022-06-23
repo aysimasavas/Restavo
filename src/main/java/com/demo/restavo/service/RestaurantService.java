@@ -30,4 +30,11 @@ public class RestaurantService {
 		return Optional.of(repo.findByCategory_categoryId(id));
 	}
 
+	public Restaurant save(Restaurant restaurant) {
+		return repo.save(restaurant);
+	}
+
+	public void delete(long id) {
+		repo.deleteById(id);
+	}
 }
