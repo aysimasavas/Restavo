@@ -30,12 +30,22 @@ public class Restaurant {
 	@Column(name = "table_count")
 	private int table_count;
 
+	@Column(name = "restaurant_picture")
+	private String restaurantPicture;
+
+	@Column(name = "menu_picture")
+	private String menuPicture;
+
+	@Column(name = "average_price")
+	private int averagePrice;
+
 	@ManyToOne()
 	@JoinColumn(name = "category_id")
 	private Category category;
 
+
 	public Restaurant(long id, String name, String description, String address, String tel, int table_count,
-			Category category) {
+			String restaurantPicture, String menuPicture, int averagePrice, Category category) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -43,6 +53,9 @@ public class Restaurant {
 		this.address = address;
 		this.tel = tel;
 		this.table_count = table_count;
+		this.restaurantPicture = restaurantPicture;
+		this.menuPicture = menuPicture;
+		this.averagePrice = averagePrice;
 		this.category = category;
 	}
 
@@ -106,6 +119,30 @@ public class Restaurant {
 
 	public void setTable_count(int table_count) {
 		this.table_count = table_count;
+	}
+
+	public String getRestaurantPicture() {
+		return restaurantPicture;
+	}
+
+	public void setRestaurantPicture(String restaurantPicture) {
+		this.restaurantPicture = restaurantPicture;
+	}
+
+	public String getMenuPicture() {
+		return menuPicture;
+	}
+
+	public void setMenuPicture(String menuPicture) {
+		this.menuPicture = menuPicture;
+	}
+
+	public int getAveragePrice() {
+		return averagePrice;
+	}
+
+	public void setAveragePrice(int averagePrice) {
+		this.averagePrice = averagePrice;
 	}
 
 }

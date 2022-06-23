@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.restavo.entities.Category;
@@ -69,11 +70,14 @@ public class RestaurantController {
 	
 	@DeleteMapping("/restaurant/delete/{id}")
 	public ResponseEntity<String> deleteRestaurant(@PathVariable("id") long id) {
-
 		restaurantService.delete(id);
 		return ResponseEntity.ok("deleted");
 	}
 
-
+	@GetMapping("/search")
+	public ResponseEntity<List<Restaurant>> search(@RequestParam String searchName) {
+		Optional<List<Restaurant>> restaurants = restaurantService.findByName(searchName);
+		return ResponseEntity.ok(restaurants.get());
+	}
 
 }

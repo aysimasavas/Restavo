@@ -37,4 +37,8 @@ public class RestaurantService {
 	public void delete(long id) {
 		repo.deleteById(id);
 	}
+
+	public Optional<List<Restaurant>> findByName(String name) {
+		return Optional.of(repo.findByName(name));
+	}
 }
