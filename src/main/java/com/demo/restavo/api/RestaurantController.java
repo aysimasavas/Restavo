@@ -67,6 +67,12 @@ public class RestaurantController {
 		return ResponseEntity.ok(restaurant);
 	}
 
+	@PostMapping("/category/create")
+	public ResponseEntity<Category> addRestaurant(@RequestBody Category category) {
+		categoryService.save(category);
+		return ResponseEntity.ok(category);
+	}
+
 	
 	@DeleteMapping("/restaurant/delete/{id}")
 	public ResponseEntity<String> deleteRestaurant(@PathVariable("id") long id) {

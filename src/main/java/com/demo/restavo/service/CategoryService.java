@@ -21,4 +21,8 @@ public class CategoryService {
 		return repo.findAll();
 	}
 
+	public Category save(Category cat) {
+		return repo.save(cat);
+	}
+
 }
