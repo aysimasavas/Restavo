@@ -2,6 +2,8 @@ package com.demo.restavo.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,6 +15,7 @@ public class Restaurant {
 
 	@Id
 	@Column(name = "restaurant_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@Column(name = "name")
@@ -39,13 +42,20 @@ public class Restaurant {
 	@Column(name = "average_price")
 	private int averagePrice;
 
+	@Column(name = "search")
+	private String search;
+
+	@Column(name = "rate")
+	private double rate;
+
 	@ManyToOne()
 	@JoinColumn(name = "category_id")
 	private Category category;
 
 
 	public Restaurant(long id, String name, String description, String address, String tel, int table_count,
-			String restaurantPicture, String menuPicture, int averagePrice, Category category) {
+			String restaurantPicture, String menuPicture, int averagePrice, String search, double rate,
+			Category category) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -56,6 +66,8 @@ public class Restaurant {
 		this.restaurantPicture = restaurantPicture;
 		this.menuPicture = menuPicture;
 		this.averagePrice = averagePrice;
+		this.search = search;
+		this.rate = rate;
 		this.category = category;
 	}
 
@@ -143,6 +155,22 @@ public class Restaurant {
 
 	public void setAveragePrice(int averagePrice) {
 		this.averagePrice = averagePrice;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public double getRate() {
+		return rate;
+	}
+
+	public void setRate(double rate) {
+		this.rate = rate;
 	}
 
 }

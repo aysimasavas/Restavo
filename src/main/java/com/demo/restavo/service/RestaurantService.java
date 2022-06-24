@@ -41,4 +41,8 @@ public class RestaurantService {
 	public Optional<List<Restaurant>> findByName(String name) {
 		return Optional.of(repo.findByName(name));
 	}
+
+	public Optional<List<Restaurant>> findBySearchText(String desc) {
+		return Optional.of(repo.findBySearch(desc));
+	}
 }

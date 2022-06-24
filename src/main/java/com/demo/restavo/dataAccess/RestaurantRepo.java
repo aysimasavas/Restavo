@@ -17,7 +17,11 @@ public interface RestaurantRepo extends JpaRepository<Restaurant, Long> {
 	@Query("select r from Restaurant r where r.name like concat('%',:name,'%')")
 	List<Restaurant> findByName(@Param("name") String name);
 
-	// @Query("select r from restaurant r where r.category_id = :id")
+
+	@Query("select r from Restaurant r where r.search like concat('%',:search,'%')")
+	List<Restaurant> findBySearch(@Param("search") String search);
+
+
 	List<Restaurant> findByCategory_categoryId(@Param("category_id") Long id);
 	
 

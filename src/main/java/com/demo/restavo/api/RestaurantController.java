@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,7 +70,7 @@ public class RestaurantController {
 	}
 
 	@PostMapping("/category/create")
-	public ResponseEntity<Category> addRestaurant(@RequestBody Category category) {
+	public ResponseEntity<Category> addCategory(@RequestBody Category category) {
 		categoryService.save(category);
 		return ResponseEntity.ok(category);
 	}
@@ -82,8 +84,28 @@ public class RestaurantController {
 
 	@GetMapping("/search")
 	public ResponseEntity<List<Restaurant>> search(@RequestParam String searchName) {
-		Optional<List<Restaurant>> restaurants = restaurantService.findByName(searchName);
+		Optional<List<Restaurant>> restaurants = restaurantService.findBySearchText(searchName);
 		return ResponseEntity.ok(restaurants.get());
+	}
+
+	@PutMapping("/restaurant/update/{id}")
+	public ResponseEntity<Restaurant> updateRestaurant(@PathVariable("id") long id,
+			@RequestBody Restaurant restaurant) {
+
+		Optional<Restaurant> restaurantData=restaurantService.findAllById(id);
+		if(restaurantData.isPresent()) {
+			Restaurant _restaurant = restaurantData.get();
+			_restaurant.setAddress(restaurant.getAddress());
+			_restaurant.setName(restaurant.getName());
+			_restaurant.setAveragePrice(restaurant.getAveragePrice());
+			_restaurant.setDescription(restaurant.getDescription());
+			_restaurant.setRestaurantPicture(restaurant.getRestaurantPicture());
+
+			return new ResponseEntity<>(restaurantService.save(_restaurant), HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 }
