@@ -6,6 +6,4 @@ import com.demo.restavo.entities.Category;
 
 public interface CategoryRepo extends JpaRepository<Category, Long> {
 
-
-
 }

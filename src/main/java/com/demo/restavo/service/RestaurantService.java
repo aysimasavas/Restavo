@@ -13,6 +13,7 @@ public class RestaurantService {
 
 	private final RestaurantRepo repo;
 
+
 	public RestaurantService(RestaurantRepo repo) {
 		this.repo = repo;
 	}
@@ -29,4 +30,19 @@ public class RestaurantService {
 		return Optional.of(repo.findByCategory_categoryId(id));
 	}
 
+	public Restaurant save(Restaurant restaurant) {
+		return repo.save(restaurant);
+	}
+
+	public void delete(long id) {
+		repo.deleteById(id);
+	}
+
+	public Optional<List<Restaurant>> findByName(String name) {
+		return Optional.of(repo.findByName(name));
+	}
+
+	public Optional<List<Restaurant>> findBySearchText(String desc) {
+		return Optional.of(repo.findBySearch(desc));
+	}
 }

@@ -14,9 +14,8 @@ import javax.persistence.Table;
 public class Restaurant {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	@Column(name = "restaurant_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@Column(name = "name")
@@ -34,11 +33,28 @@ public class Restaurant {
 	@Column(name = "table_count")
 	private int table_count;
 
+	@Column(name = "restaurant_picture")
+	private String restaurantPicture;
+
+	@Column(name = "menu_picture")
+	private String menuPicture;
+
+	@Column(name = "average_price")
+	private int averagePrice;
+
+	@Column(name = "search")
+	private String search;
+
+	@Column(name = "rate")
+	private double rate;
+
 	@ManyToOne()
 	@JoinColumn(name = "category_id")
 	private Category category;
 
+
 	public Restaurant(long id, String name, String description, String address, String tel, int table_count,
+			String restaurantPicture, String menuPicture, int averagePrice, String search, double rate,
 			Category category) {
 		super();
 		this.id = id;
@@ -47,6 +63,11 @@ public class Restaurant {
 		this.address = address;
 		this.tel = tel;
 		this.table_count = table_count;
+		this.restaurantPicture = restaurantPicture;
+		this.menuPicture = menuPicture;
+		this.averagePrice = averagePrice;
+		this.search = search;
+		this.rate = rate;
 		this.category = category;
 	}
 
@@ -110,6 +131,46 @@ public class Restaurant {
 
 	public void setTable_count(int table_count) {
 		this.table_count = table_count;
+	}
+
+	public String getRestaurantPicture() {
+		return restaurantPicture;
+	}
+
+	public void setRestaurantPicture(String restaurantPicture) {
+		this.restaurantPicture = restaurantPicture;
+	}
+
+	public String getMenuPicture() {
+		return menuPicture;
+	}
+
+	public void setMenuPicture(String menuPicture) {
+		this.menuPicture = menuPicture;
+	}
+
+	public int getAveragePrice() {
+		return averagePrice;
+	}
+
+	public void setAveragePrice(int averagePrice) {
+		this.averagePrice = averagePrice;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public double getRate() {
+		return rate;
+	}
+
+	public void setRate(double rate) {
+		this.rate = rate;
 	}
 
 }
